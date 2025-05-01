@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import Login from "./Components/Login";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import Weather from "./Components/Weather";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
+//import { db } from './firebase'; // ✅ Pre-configured and initialized
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -13,27 +15,32 @@ import { v4 as uuidv4 } from 'uuid'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAj3eAAiJh27t08bZSUnnUjT0ONSfK3q-w",
-  authDomain: "ws-survery-f8989.firebaseapp.com",
-  databaseURL: "https://ws-survery-f8989-default-rtdb.firebaseio.com",
-  projectId: "ws-survery-f8989",
-  storageBucket: "ws-survery-f8989.appspot.com",
-  messagingSenderId: "41657779711",
-  appId: "1:41657779711:web:1247504ad123b3805d13ca",
-  measurementId: "G-XQ4L7845W7"
+  apiKey: "your api",
+  authDomain: "weather-app-.firebaseapp.com",
+  projectId: "weather-app-",
+  storageBucket: "weather-app-.firebasestorage.app",
+  messagingSenderId: "yourId",
+  appId: "1::web:",
+  measurementId: "yourId"
 };
+
 
 // Initialize Firebase
 
 function App() {
   const [user, setUser] = useState([]);
   const logoutAfter = 3600000;
-  let app, auth, provider;
+ // let app, auth, provider;
+  const app = useRef(null);
+  const auth = useRef(null);
+  const provider = useRef(null);
+  //const starCountRef = useRef(null);
+  //const [dataObj, setDataObj] = useState({});
   useEffect(
     () => {
-      app = initializeApp(firebaseConfig);
-      auth = getAuth();
-      provider = new GoogleAuthProvider();
+      app.current = initializeApp(firebaseConfig);
+      auth.current = getAuth();
+      provider.current = new GoogleAuthProvider();
     },
     []
   )
@@ -55,7 +62,7 @@ function App() {
     []
   )
   const addRecentToDb = (data) => {
-    const db = getDatabase(app)
+    const db = getDatabase(app.current)
     const id = uuidv4()
     // console.log(user.email);
     // return 
@@ -73,11 +80,11 @@ function App() {
   }
 
   const googleLoginHandler = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth.current, provider.current)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+       // const credential = GoogleAuthProvider.credentialFromResult(result);
+       // const token = credential.accessToken;
         // The signed-in user info.
         localStorage.setItem("userData", JSON.stringify(result.user));
         localStorage.setItem("loginAt", new Date().getTime())
@@ -85,12 +92,12 @@ function App() {
         // ...
       }).catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        //const errorCode = error.code;
+        //const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.email;
+        //const email = error.email;
         // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        //const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
   }

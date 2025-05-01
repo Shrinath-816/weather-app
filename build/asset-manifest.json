@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Shrinath-816/weather-ap/static/css/main.e6c13ad2.css",
+    "main.js": "/Shrinath-816/weather-ap/static/js/main.76cc6061.js",
+    "static/js/787.42650831.chunk.js": "/Shrinath-816/weather-ap/static/js/787.42650831.chunk.js",
+    "index.html": "/Shrinath-816/weather-ap/index.html",
+    "main.e6c13ad2.css.map": "/Shrinath-816/weather-ap/static/css/main.e6c13ad2.css.map",
+    "main.76cc6061.js.map": "/Shrinath-816/weather-ap/static/js/main.76cc6061.js.map",
+    "787.42650831.chunk.js.map": "/Shrinath-816/weather-ap/static/js/787.42650831.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.76cc6061.js"
+  ]
+}

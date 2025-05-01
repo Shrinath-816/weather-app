@@ -10,7 +10,7 @@ export default function Weather(props) {
     const [long, setLong] = useState("");
     const [city, setCity] = useState("");
     const [recent, setRecent] = useState([]);
-    let icon;
+    //let icon;
     const cityNameInput = useRef();
     const errorBox = useRef()
     useEffect(
